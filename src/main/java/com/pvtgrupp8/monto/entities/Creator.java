@@ -1,11 +1,8 @@
 package com.pvtgrupp8.monto.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "creator")
@@ -22,11 +19,23 @@ public class Creator {
     @Column(name = "last_name")
     private String lastName;
 
+    @OneToMany(mappedBy="creator",
+        cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    private List<Attraction> attractions;
+
     public Creator(){}
 
     public Creator(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public void add(Attraction tempAttraction){
+        if(attractions == null){
+            attractions = new ArrayList<>();
+        }
+        attractions.add(tempAttraction);
+        tempAttraction.setCreator(this);
     }
 
     public int getId() {

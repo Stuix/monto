@@ -23,13 +23,16 @@ public class Attraction {
     @Column(name="title_english")
     private String titleEnglish;
 
-    @Column(name="position_id")
+    @OneToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name="position_id")
     private Position position;
 
-    @Column(name="category_id")
+    @ManyToOne
+    @JoinColumn(name="category_id")
     private Category category;
 
-    @Column(name="creator_id")
+    @ManyToOne
+    @JoinColumn(name="creator_id")
     private Creator creator;
 
     public Attraction(){};
@@ -107,6 +110,8 @@ public class Attraction {
     public void setCreator(Creator creator) {
         this.creator = creator;
     }
+
+
 
     @Override
     public String toString() {

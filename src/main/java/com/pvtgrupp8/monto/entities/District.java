@@ -1,11 +1,8 @@
 package com.pvtgrupp8.monto.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "district")
@@ -19,10 +16,27 @@ public class District {
     @Column(name = "name")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name="city_id")
+    private City city;
+
+    @OneToMany(mappedBy="district",
+        cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    private List<Position> positions;
+
+
     public District(){}
 
     public District(String name) {
         this.name = name;
+    }
+
+    public void add(Position tempPosition){
+        if(positions == null){
+            positions = new ArrayList<>();
+        }
+        positions.add(tempPosition);
+        tempPosition.setDistrict(this);
     }
 
     public int getId() {
@@ -39,6 +53,22 @@ public class District {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public List<Position> getPositions() {
+        return positions;
+    }
+
+    public void setPositions(List<Position> positions) {
+        this.positions = positions;
     }
 
     @Override

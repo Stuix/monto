@@ -1,11 +1,10 @@
 package com.pvtgrupp8.monto.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.w3c.dom.Attr;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -19,10 +18,22 @@ public class Category {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy="category",
+        cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    private List<Attraction> attractions;
+
     public Category(){}
 
     public Category(String name) {
         this.name = name;
+    }
+
+    public void add(Attraction tempAttraction){
+        if(attractions == null){
+            attractions = new ArrayList<>();
+        }
+        attractions.add(tempAttraction);
+        tempAttraction.setCategory(this);
     }
 
     public int getId() {
@@ -39,6 +50,14 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Attraction> getAttractions() {
+        return attractions;
+    }
+
+    public void setAttractions(List<Attraction> attractions) {
+        this.attractions = attractions;
     }
 
     @Override

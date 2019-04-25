@@ -12,16 +12,18 @@ public class Position {
     @Column(name="id")
     private int id;
 
-    @Column(name="longitude")
+    @Column(name="longitud")
     private double longitude;
 
-    @Column(name="latitude")
+    @Column(name="latitud")
     private double latitude;
 
-    @Column(name="attraction_id")
+    @OneToOne(mappedBy="position",
+        cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private Attraction attraction;
 
-    @Column(name="district_id")
+    @ManyToOne
+    @JoinColumn(name="district_id")
     private District district;
 
     public Position(){};
@@ -72,6 +74,8 @@ public class Position {
     public void setDistrict(District district) {
         this.district = district;
     }
+
+
 
     @Override
     public String toString() {
