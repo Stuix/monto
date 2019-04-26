@@ -71,6 +71,17 @@
         </plugins>
 
         <finalName>Monto</finalName>
+
+        <resources>
+            <resource>
+                <directory>resources</directory>
+                <targetPath>${project.build.outputDirectory}</targetPath>
+                <includes>
+                    <include>test.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
     </build>
 
 </project>
