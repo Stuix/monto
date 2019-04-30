@@ -1,10 +1,9 @@
 package com.pvtgrupp8.monto.entities;
 
-import org.w3c.dom.Attr;
-
 import javax.persistence.*;
 
 @Entity
+@Table(name="location")
 public class Position {
 
     @Id

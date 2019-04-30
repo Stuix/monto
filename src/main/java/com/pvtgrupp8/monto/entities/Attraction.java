@@ -3,7 +3,7 @@ package com.pvtgrupp8.monto.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name="attraction")
+@Table(name="attractions")
 public class Attraction {
 
     @Id
