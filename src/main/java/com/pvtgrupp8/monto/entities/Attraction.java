@@ -24,18 +24,26 @@ public class Attraction {
     private String titleEnglish;
 
     @OneToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name="position_id")
+    @JoinColumn(name="location_id")
     private Position position;
 
     @ManyToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name="typeofattraction_id")
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name="creator_id")
+    @JoinColumn(name="artist_id")
     private Creator creator;
 
     public Attraction(){};
+
+    public Attraction(String description, String picture, String title, String titleEnglish, Category category) {
+        this.description = description;
+        this.picture = picture;
+        this.title = title;
+        this.titleEnglish = titleEnglish;
+        this.category = category;
+    }
 
     public Attraction(String description, String picture, String title, String titleEnglish, Position position, Category category, Creator creator) {
         this.description = description;
