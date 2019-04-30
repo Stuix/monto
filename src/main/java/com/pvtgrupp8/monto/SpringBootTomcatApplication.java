@@ -13,6 +13,7 @@ public class SpringBootTomcatApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(application);
+
     }
 
     @Override

@@ -28,6 +28,11 @@ public class Position {
 
     public Position(){};
 
+    public Position(double longitude, double latidude){
+        this.longitude = longitude;
+        this.latitude = latidude;
+    }
+
     public Position(double longitude, double latitude, Attraction attraction, District district) {
         this.longitude = longitude;
         this.latitude = latitude;
