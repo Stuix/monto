@@ -57,19 +57,7 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
-
-
-
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>pvt08.repo</id>
-            <name>PVT08 repo</name>
-            <url>git.dsv.su.se/git/guju7746/monto.git</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <plugins>
             <plugin>
