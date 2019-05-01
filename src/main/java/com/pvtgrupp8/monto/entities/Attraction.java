@@ -1,6 +1,8 @@
 package com.pvtgrupp8.monto.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="attractions")
@@ -31,28 +33,24 @@ public class Attraction {
     @JoinColumn(name="typeofattraction_id")
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name="artist_id")
-    private Creator creator;
+    @ManyToMany
+    @JoinTable(
+        name="attraction_creator",
+        joinColumns={@JoinColumn(name="attraction_id")},
+        inverseJoinColumns ={@JoinColumn(name="creator_id")}
+    )
+    private List<Creator> creators;
 
     public Attraction(){};
 
-    public Attraction(String description, String picture, String title, String titleEnglish, Category category) {
-        this.description = description;
-        this.picture = picture;
-        this.title = title;
-        this.titleEnglish = titleEnglish;
-        this.category = category;
-    }
-
-    public Attraction(String description, String picture, String title, String titleEnglish, Position position, Category category, Creator creator) {
+    public Attraction(String description, String picture, String title, String titleEnglish, Position position, Category category, List<Creator> creators) {
         this.description = description;
         this.picture = picture;
         this.title = title;
         this.titleEnglish = titleEnglish;
         this.position = position;
         this.category = category;
-        this.creator = creator;
+        this.creators = creators;
     }
 
     public int getId() {
@@ -111,15 +109,20 @@ public class Attraction {
         this.category = category;
     }
 
-    public Creator getCreator() {
-        return creator;
+    public List<Creator> getCreators() {
+        return creators;
     }
 
-    public void setCreator(Creator creator) {
-        this.creator = creator;
+    public void setCreators(List<Creator> creators) {
+        this.creators = creators;
     }
 
-
+    public void addCreator(Creator creator){
+        if(creators==null) {
+            creators = new ArrayList<>();
+        }
+        creators.add(creator);
+    }
 
     @Override
     public String toString() {
@@ -131,7 +134,7 @@ public class Attraction {
             ", titleEnglish='" + titleEnglish + '\'' +
             ", position=" + position +
             ", category=" + category +
-            ", creator=" + creator +
+            ", creators=" + creators +
             '}';
     }
 }

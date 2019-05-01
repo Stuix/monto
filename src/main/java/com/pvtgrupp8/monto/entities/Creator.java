@@ -19,7 +19,7 @@ public class Creator {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy="creator",
+    @ManyToMany(mappedBy="creator",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     private List<Attraction> attractions;
 
@@ -35,7 +35,7 @@ public class Creator {
             attractions = new ArrayList<>();
         }
         attractions.add(tempAttraction);
-        tempAttraction.setCreator(this);
+        tempAttraction.addCreator(this);
     }
 
     public int getId() {

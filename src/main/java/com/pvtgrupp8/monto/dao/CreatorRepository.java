@@ -1,14 +1,15 @@
 package com.pvtgrupp8.monto.dao;
 
 import com.pvtgrupp8.monto.entities.Creator;
-import com.pvtgrupp8.monto.entities.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 
 import java.util.List;
 
 public interface CreatorRepository extends JpaRepository<Creator, Integer> {
 
-    List<Creator> findByLastNameIgnoreCaseContaining(String lastName);
+
+    List<Creator> findByLastNameOrFirstNameIgnoreCaseContaining(String lastName,String firstName);
 
 
 }
