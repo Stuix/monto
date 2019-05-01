@@ -19,7 +19,7 @@ public class Creator {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToMany(mappedBy="creator",
+    @ManyToMany(mappedBy="creators",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     private List<Attraction> attractions;
 
