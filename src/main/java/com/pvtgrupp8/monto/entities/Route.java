@@ -24,7 +24,7 @@ public class Route {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    private User userCreator;
+    private User routeCreator;
 
     @ManyToMany(mappedBy="includedInRoutes",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
