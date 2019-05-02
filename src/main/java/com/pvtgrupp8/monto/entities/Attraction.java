@@ -41,6 +41,23 @@ public class Attraction {
     )
     private List<Creator> creators;
 
+    @ManyToMany
+    @JoinTable(
+        name="attraction_route",
+        joinColumns={@JoinColumn(name="attraction_id")},
+        inverseJoinColumns={@JoinColumn(name="route_id")}
+    )
+    private List<Route> includedInRoutes;
+
+    @ManyToMany
+    @JoinTable(
+        name="attraction_user",
+        joinColumns={@JoinColumn(name="attraction_id")},
+        inverseJoinColumns = {@JoinColumn(name="user_id")}
+    )
+    private List<User> collectedByList;
+
+
     public Attraction(){};
 
     public Attraction(String description, String picture, String title, String titleEnglish, Position position, Category category, List<Creator> creators) {
