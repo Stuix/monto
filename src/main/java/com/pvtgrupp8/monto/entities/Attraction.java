@@ -35,9 +35,9 @@ public class Attraction {
 
     @ManyToMany
     @JoinTable(
-        name="attraction_creator",
+        name="attraction_artist",
         joinColumns={@JoinColumn(name="attraction_id")},
-        inverseJoinColumns ={@JoinColumn(name="creator_id")}
+        inverseJoinColumns ={@JoinColumn(name="artist_id")}
     )
     private List<Creator> creators;
 
