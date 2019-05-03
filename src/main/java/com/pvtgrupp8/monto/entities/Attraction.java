@@ -141,6 +141,15 @@ public class Attraction {
         creators.add(creator);
     }
 
+    public void addToIncludedIn(Route route){
+        if(includedInRoutes == null){
+            includedInRoutes=new ArrayList<>();
+        }
+        includedInRoutes.add(route);
+    }
+
+
+
     @Override
     public String toString() {
         return "Attraction{" +
