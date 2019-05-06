@@ -8,4 +8,5 @@ import java.util.List;
 public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     List<Route> findAllByAttractions(String attractionName);
+
 }

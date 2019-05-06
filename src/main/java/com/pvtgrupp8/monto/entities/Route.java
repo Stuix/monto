@@ -27,8 +27,12 @@ public class Route {
     @JoinColumn(name="user_id")
     private User routeCreator;
 
-    @ManyToMany(mappedBy="includedInRoutes",
-        cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @ManyToMany
+    @JoinTable(
+        name="attraction_route",
+        joinColumns={@JoinColumn(name="route_id")},
+        inverseJoinColumns={@JoinColumn(name="attraction_id")}
+    )
     private List<Attraction> attractions;
 
     public Route(){};

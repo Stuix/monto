@@ -41,12 +41,8 @@ public class Attraction {
     )
     private List<Creator> creators;
 
-    @ManyToMany
-    @JoinTable(
-        name="attraction_route",
-        joinColumns={@JoinColumn(name="attraction_id")},
-        inverseJoinColumns={@JoinColumn(name="route_id")}
-    )
+    @ManyToMany(mappedBy="attractions",
+        cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     private List<Route> includedInRoutes;
 
     @ManyToMany
