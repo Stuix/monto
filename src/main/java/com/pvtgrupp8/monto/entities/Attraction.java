@@ -45,12 +45,8 @@ public class Attraction {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     private List<Route> includedInRoutes;
 
-    @ManyToMany
-    @JoinTable(
-        name="attraction_user",
-        joinColumns={@JoinColumn(name="attraction_id")},
-        inverseJoinColumns = {@JoinColumn(name="user_id")}
-    )
+    @ManyToMany(mappedBy="seenAttractions",
+        cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     private List<User> collectedByList;
 
 

@@ -27,8 +27,12 @@ public class User {
     @OneToMany(mappedBy="ratingCreator")
     private List<Rating> ratings;
 
-    @ManyToMany(mappedBy="collectedByList",
-        cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+   @ManyToMany
+   @JoinTable(
+       name="attraction_user",
+       joinColumns={@JoinColumn(name="user_id")},
+       inverseJoinColumns = {@JoinColumn(name="attraction_id")}
+   )
     private List<Attraction> seenAttractions;
 
     public User(){};
