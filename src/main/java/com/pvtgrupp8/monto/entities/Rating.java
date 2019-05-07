@@ -1,6 +1,11 @@
 package com.pvtgrupp8.monto.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 
 @Entity
 @Table(name="rating")
@@ -12,12 +17,15 @@ public class Rating {
     private int id;
 
     @Column(name="rating")
+    @DecimalMin("0")
+    @DecimalMax("5")
     private double rating;
 
     @ManyToOne(
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
     )
     @JoinColumn(name="user_id")
+    @JsonManagedReference
     private User ratingCreator;
 
     @Column(name = "comment")
@@ -27,6 +35,7 @@ public class Rating {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
     )
     @JoinColumn(name="route_id")
+    @JsonBackReference
     private Route route;
 
     public Rating() {}

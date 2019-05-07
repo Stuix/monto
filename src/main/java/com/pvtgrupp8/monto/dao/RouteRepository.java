@@ -9,4 +9,7 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     List<Route> findAllByAttractions(String attractionName);
 
+    List<Route>findByRouteNameIgnoreCaseContaining(String routeName);
+
+
 }

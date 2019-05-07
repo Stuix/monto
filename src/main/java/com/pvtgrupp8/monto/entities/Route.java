@@ -1,6 +1,11 @@
 package com.pvtgrupp8.monto.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +19,12 @@ public class Route {
     private int id;
 
     @Column(name="route_name")
+    @NotNull
     private String routeName;
 
     @OneToMany(mappedBy="route",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JsonManagedReference
     private List<Rating> ratings;
 
     @Column(name="description")
@@ -25,6 +32,7 @@ public class Route {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonBackReference
     private User routeCreator;
 
     @ManyToMany
@@ -33,7 +41,16 @@ public class Route {
         joinColumns={@JoinColumn(name="route_id")},
         inverseJoinColumns={@JoinColumn(name="attraction_id")}
     )
+    @JsonManagedReference
     private List<Attraction> attractions;
+
+    @Column(name="is_public")
+    private boolean isPublic;
+
+    @OneToMany(mappedBy = "activeRoute",
+        cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JsonIgnore
+    private List<User> activeUsers;
 
     public Route(){};
 
@@ -109,6 +126,22 @@ public class Route {
         this.attractions = attractions;
     }
 
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    public List<User> getActiveUsers() {
+        return activeUsers;
+    }
+
+    public void setActiveUsers(List<User> activeUsers) {
+        this.activeUsers = activeUsers;
+    }
+
     @Override
     public String toString() {
         return "Route{" +
@@ -116,7 +149,7 @@ public class Route {
             ", routeName='" + routeName + '\'' +
             ", ratings=" + ratings +
             ", description='" + description + '\'' +
-            ", routeCreator=" + routeCreator +
+           // ", routeCreator=" + routeCreator +
             ", attractions=" + attractions +
             '}';
     }

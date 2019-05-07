@@ -1,6 +1,11 @@
 package com.pvtgrupp8.monto.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +19,22 @@ public class User {
     private int id;
 
     @Column(name="username")
+    @NotNull
     private String username;
 
     @Column(name="email")
+    @Email(message="Not a valid email address")
     private String email;
+
 
     @OneToMany(mappedBy = "routeCreator",
     cascade={
-        CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+        CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH},fetch= FetchType.LAZY)
+    @JsonManagedReference
     private List<Route> routes;
 
-    @OneToMany(mappedBy="ratingCreator")
+    @OneToMany(mappedBy="ratingCreator",fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Rating> ratings;
 
    @ManyToMany
@@ -33,7 +43,13 @@ public class User {
        joinColumns={@JoinColumn(name="user_id")},
        inverseJoinColumns = {@JoinColumn(name="attraction_id")}
    )
+   @JsonManagedReference
     private List<Attraction> seenAttractions;
+
+   @ManyToOne
+   @JoinColumn(name="active_route_id")
+   @JsonManagedReference
+    private Route activeRoute;
 
     public User(){};
 
@@ -108,13 +124,21 @@ public class User {
         this.seenAttractions = seenAttractions;
     }
 
+    public Route getActiveRoute() {
+        return activeRoute;
+    }
+
+    public void setActiveRoute(Route activeRoute) {
+        this.activeRoute = activeRoute;
+    }
+
     @Override
     public String toString() {
         return "User{" +
             "id=" + id +
             ", username='" + username + '\'' +
             ", email='" + email + '\'' +
-            ", routes=" + routes +
+             //", routes=" + routes +
             ", ratings=" + ratings +
             ", seenAttractions=" + seenAttractions +
             '}';

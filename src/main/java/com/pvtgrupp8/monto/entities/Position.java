@@ -1,5 +1,8 @@
 package com.pvtgrupp8.monto.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,10 +22,12 @@ public class Position {
 
     @OneToOne(mappedBy="position",
         cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @JsonManagedReference
     private Attraction attraction;
 
     @ManyToOne
     @JoinColumn(name="district_id")
+    @JsonBackReference
     private District district;
 
     public Position(){};

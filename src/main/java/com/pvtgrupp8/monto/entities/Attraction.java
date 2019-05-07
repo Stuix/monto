@@ -1,8 +1,19 @@
 package com.pvtgrupp8.monto.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+
+/*
+OneToMany: LAZY
+ManyToOne: EAGER
+ManyToMany: LAZY
+OneToOne: EAGER
+*/
 
 @Entity
 @Table(name="attractions")
@@ -27,10 +38,12 @@ public class Attraction {
 
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="location_id")
+    @JsonBackReference
     private Position position;
 
     @ManyToOne
     @JoinColumn(name="typeofattraction_id")
+    @JsonBackReference
     private Category category;
 
     @ManyToMany
@@ -39,14 +52,17 @@ public class Attraction {
         joinColumns={@JoinColumn(name="attraction_id")},
         inverseJoinColumns ={@JoinColumn(name="artist_id")}
     )
+    @JsonManagedReference
     private List<Creator> creators;
 
     @ManyToMany(mappedBy="attractions",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JsonBackReference
     private List<Route> includedInRoutes;
 
     @ManyToMany(mappedBy="seenAttractions",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JsonBackReference
     private List<User> collectedByList;
 
 

@@ -1,5 +1,7 @@
 package com.pvtgrupp8.monto.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.w3c.dom.Attr;
 
 import javax.persistence.*;
@@ -20,6 +22,7 @@ public class Category {
 
     @OneToMany(mappedBy="category",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JsonManagedReference
     private List<Attraction> attractions;
 
     public Category(){}
