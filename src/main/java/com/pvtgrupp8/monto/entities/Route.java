@@ -9,8 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name="route")
-@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class,
-    property="id")
 public class Route {
 
     @Id
