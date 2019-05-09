@@ -1,7 +1,6 @@
 package com.pvtgrupp8.monto.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import org.w3c.dom.Attr;
 
 import javax.persistence.*;

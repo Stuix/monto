@@ -1,8 +1,6 @@
 package com.pvtgrupp8.monto.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,21 +22,30 @@ public class Attraction {
     @Column(name="id")
     private int id;
 
-    @Column(name="description")
-    private String description;
-
-    @Column(name="picture")
-    private String picture;
-
     @Column(name="title")
     private String title;
 
     @Column(name="title_english")
     private String titleEnglish;
 
+    @Column(name="year_made")
+    private int yearMade;
+
+    @Column(name="description")
+    private String description;
+
+    @OneToOne(cascade= CascadeType.ALL)
+    @JoinColumn(name="fun_fact_id")
+    @JsonManagedReference
+    private FunFact funFact;
+
+    @Column(name="picture")
+    private String picture;
+
+
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="location_id")
-    @JsonBackReference
+    @JsonIgnoreProperties("attraction") //Ignore depening on what entity gets called
     private Position position;
 
     @ManyToOne
@@ -52,7 +59,7 @@ public class Attraction {
         joinColumns={@JoinColumn(name="attraction_id")},
         inverseJoinColumns ={@JoinColumn(name="artist_id")}
     )
-    @JsonManagedReference
+    @JsonIgnoreProperties("attractions")
     private List<Creator> creators;
 
     @ManyToMany(mappedBy="attractions",
@@ -64,6 +71,7 @@ public class Attraction {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     @JsonBackReference
     private List<User> collectedByList;
+
 
 
     public Attraction(){};

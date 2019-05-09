@@ -1,6 +1,9 @@
 package com.pvtgrupp8.monto.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,9 +24,12 @@ public class Creator {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name="description")
+    private String description;
+
     @ManyToMany(mappedBy="creators",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonBackReference
+    @JsonIgnoreProperties("creators")
     private List<Attraction> attractions;
 
     public Creator(){}
@@ -63,6 +69,22 @@ public class Creator {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Attraction> getAttractions() {
+        return attractions;
+    }
+
+    public void setAttractions(List<Attraction> attractions) {
+        this.attractions = attractions;
     }
 
     @Override

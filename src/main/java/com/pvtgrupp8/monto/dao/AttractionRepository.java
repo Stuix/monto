@@ -13,4 +13,5 @@ public interface AttractionRepository extends JpaRepository<Attraction, Integer>
    // @Query("from Attraction where title like %?1")
     List<Attraction> findByTitleIgnoreCaseContaining(String title);
 
+    Attraction findById(int id);
 }

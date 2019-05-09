@@ -1,7 +1,6 @@
 package com.pvtgrupp8.monto.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,12 +20,12 @@ public class District {
 
     @ManyToOne
     @JoinColumn(name="city_id")
-    @JsonBackReference
+    @JsonIgnoreProperties("districts")
     private City city;
 
     @OneToMany(mappedBy="district",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonManagedReference
+    @JsonIgnoreProperties("district")
     private List<Position> positions;
 
 

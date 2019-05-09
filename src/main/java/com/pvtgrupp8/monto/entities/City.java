@@ -1,6 +1,9 @@
 package com.pvtgrupp8.monto.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ public class City {
 
     @OneToMany(mappedBy="city",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonManagedReference
+    @JsonIgnoreProperties("city")
     private List<District> districts;
 
     public City(){}

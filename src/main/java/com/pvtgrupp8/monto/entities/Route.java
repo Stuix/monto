@@ -1,8 +1,6 @@
 package com.pvtgrupp8.monto.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,6 +9,8 @@ import java.util.List;
 
 @Entity
 @Table(name="route")
+@JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class,
+    property="id")
 public class Route {
 
     @Id
