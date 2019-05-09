@@ -65,6 +65,7 @@ public class Attraction {
     @ManyToMany(mappedBy="attractions",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
     @JsonBackReference
+    @JsonIgnoreProperties("attractions")
     private List<Route> includedInRoutes;
 
     @ManyToMany(mappedBy="seenAttractions",

@@ -1,9 +1,6 @@
 package com.pvtgrupp8.monto.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -32,7 +29,7 @@ public class User {
     @OneToMany(mappedBy = "routeCreator",
     cascade={
         CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH},fetch= FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnoreProperties("routeCreator")
     private List<Route> routes;
 
     @OneToMany(mappedBy="ratingCreator",fetch = FetchType.LAZY)
@@ -50,7 +47,7 @@ public class User {
 
    @ManyToOne
    @JoinColumn(name="active_route_id")
-   @JsonManagedReference
+   @JsonIgnoreProperties("activeUsers")
     private Route activeRoute;
 
     public User(){};

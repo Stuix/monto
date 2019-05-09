@@ -22,7 +22,7 @@ public class Route {
 
     @OneToMany(mappedBy="route",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonManagedReference
+    @JsonIgnoreProperties("route")
     private List<Rating> ratings;
 
     @Column(name="description")
@@ -30,7 +30,7 @@ public class Route {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @JsonBackReference
+    @JsonIgnoreProperties("routes")
     private User routeCreator;
 
     @ManyToMany
@@ -39,7 +39,7 @@ public class Route {
         joinColumns={@JoinColumn(name="route_id")},
         inverseJoinColumns={@JoinColumn(name="attraction_id")}
     )
-    @JsonManagedReference
+    @JsonIgnoreProperties("includedInRoutes")
     private List<Attraction> attractions;
 
     @Column(name="is_public")
@@ -47,7 +47,7 @@ public class Route {
 
     @OneToMany(mappedBy = "activeRoute",
         cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonIgnore
+    @JsonIgnoreProperties("activeRoute")
     private List<User> activeUsers;
 
     public Route(){};
