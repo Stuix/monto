@@ -73,6 +73,9 @@
             <id>synergian-repo</id>
             <url>https://raw.github.com/synergian/wagon-git/releases</url>
         </pluginRepository>
+
+
+
     </pluginRepositories>
 
     <build>
@@ -91,9 +94,21 @@
             </extension>
         </extensions>
 
+
         <finalName>Monto</finalName>
 
 
+
+
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>pvtxx.repo</id>
+            <name>PVTXX repo</name>
+            <url>git://git@https://github.com/Stuix/monto.git</url>
+        </repository>
+    </distributionManagement>
+
 
 </project>
