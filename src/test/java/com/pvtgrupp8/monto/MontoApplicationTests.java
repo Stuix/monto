@@ -1,4 +1,4 @@
-/*package com.pvtgrupp8.monto;
+package com.pvtgrupp8.monto;
 
 import com.pvtgrupp8.monto.entities.User;
 import org.junit.Test;
@@ -22,14 +22,15 @@ public class MontoApplicationTests {
     }
 
     @Test
-    public void userEmailTest(){
+    public void userEmailTest() {
         User testUser = new User();
         System.out.println("testing email in user");
         testUser.setEmail("test@email.com");
-        assertTrue(testUser.getEmail()=="test@email.com");
+        assertTrue(testUser.getEmail() == "test@email.com");
     }
+}
 
-   @Test
+ /*  @Test
     public void testInvalidEmail() {
         String[] invalidEmails = {"h"};
        User testUser = new User();
@@ -37,7 +38,7 @@ public class MontoApplicationTests {
        testUser.setEmail("h");
        assertFalse(testUser.getEmail()=="h");
 
-   }
+   }*/
 
 
- */
+
