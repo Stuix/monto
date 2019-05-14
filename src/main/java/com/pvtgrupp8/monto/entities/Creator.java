@@ -87,12 +87,4 @@ public class Creator {
         this.attractions = attractions;
     }
 
-    @Override
-    public String toString() {
-        return "Creator{" +
-            "id=" + id +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
-    }
 }

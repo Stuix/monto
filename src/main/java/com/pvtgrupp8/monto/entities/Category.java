@@ -21,7 +21,7 @@ public class Category {
 
     @OneToMany(mappedBy="category",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonManagedReference
+    @JsonBackReference
     private List<Attraction> attractions;
 
     public Category(){}
@@ -61,6 +61,8 @@ public class Category {
     public void setAttractions(List<Attraction> attractions) {
         this.attractions = attractions;
     }
+
+
 
     @Override
     public String toString() {

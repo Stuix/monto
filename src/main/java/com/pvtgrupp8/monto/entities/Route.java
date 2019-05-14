@@ -22,7 +22,7 @@ public class Route {
 
     @OneToMany(mappedBy="route",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonIgnoreProperties("route")
+    @JsonManagedReference
     private List<Rating> ratings;
 
     @Column(name="description")
@@ -30,7 +30,7 @@ public class Route {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @JsonIgnoreProperties("routes")
+    @JsonBackReference
     private User routeCreator;
 
     @ManyToMany
@@ -39,7 +39,7 @@ public class Route {
         joinColumns={@JoinColumn(name="route_id")},
         inverseJoinColumns={@JoinColumn(name="attraction_id")}
     )
-    @JsonIgnoreProperties("includedInRoutes")
+  //  @JsonManagedReference
     private List<Attraction> attractions;
 
     @Column(name="is_public")
@@ -47,7 +47,7 @@ public class Route {
 
     @OneToMany(mappedBy = "activeRoute",
         cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonIgnoreProperties("activeRoute")
+    @JsonIgnore
     private List<User> activeUsers;
 
     public Route(){};
@@ -108,8 +108,8 @@ public class Route {
         this.description = description;
     }
 
-    public User getRouteCreator() {
-        return routeCreator;
+     public User getRouteCreator() {
+       return routeCreator;
     }
 
     public void setRouteCreator(User routeCreator) {
@@ -140,15 +140,5 @@ public class Route {
         this.activeUsers = activeUsers;
     }
 
-    @Override
-    public String toString() {
-        return "Route{" +
-            "id=" + id +
-            ", routeName='" + routeName + '\'' +
-            ", ratings=" + ratings +
-            ", description='" + description + '\'' +
-           // ", routeCreator=" + routeCreator +
-            ", attractions=" + attractions +
-            '}';
-    }
+
 }

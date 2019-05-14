@@ -1,6 +1,7 @@
 package com.pvtgrupp8.monto.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -16,14 +17,14 @@ public class FunFact {
 
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="location_id")
-    @JsonManagedReference
+    @JsonIgnoreProperties("funFact")
     private Position position;
 
     @Column(name="description")
     private String description;
 
     @OneToOne(mappedBy="funFact",cascade= {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JsonBackReference
+    @JsonIgnoreProperties("funFact")
     private Attraction attraction;
 
 

@@ -24,7 +24,7 @@ public class Rating {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
     )
     @JoinColumn(name="user_id")
-    @JsonManagedReference
+    @JsonIgnoreProperties("ratings")
     private User ratingCreator;
 
     @Column(name = "comment")
@@ -34,7 +34,7 @@ public class Rating {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
     )
     @JoinColumn(name="route_id")
-    @JsonIgnoreProperties("ratings")
+    @JsonBackReference
     private Route route;
 
     public Rating() {}
@@ -87,14 +87,4 @@ public class Rating {
         this.route = route;
     }
 
-    @Override
-    public String toString() {
-        return "Rating{" +
-            "id=" + id +
-            ", rating=" + rating +
-            ", ratingCreator=" + ratingCreator +
-            ", comment='" + comment + '\'' +
-            ", route=" + route +
-            '}';
-    }
 }

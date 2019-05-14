@@ -25,15 +25,14 @@ public class User {
     @Email(message="Not a valid email address")
     private String email;
 
-
     @OneToMany(mappedBy = "routeCreator",
     cascade={
-        CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH},fetch= FetchType.LAZY)
-    @JsonIgnoreProperties("routeCreator")
+        CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+   // @JsonManagedReference
     private List<Route> routes;
 
     @OneToMany(mappedBy="ratingCreator",fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnoreProperties("ratingCreator")
     private List<Rating> ratings;
 
    @ManyToMany
@@ -42,7 +41,7 @@ public class User {
        joinColumns={@JoinColumn(name="user_id")},
        inverseJoinColumns = {@JoinColumn(name="attraction_id")}
    )
-   @JsonManagedReference
+  // @JsonManagedReference
     private List<Attraction> seenAttractions;
 
    @ManyToOne
@@ -95,6 +94,7 @@ public class User {
         return email;
     }
 
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -131,15 +131,4 @@ public class User {
         this.activeRoute = activeRoute;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-            "id=" + id +
-            ", username='" + username + '\'' +
-            ", email='" + email + '\'' +
-             //", routes=" + routes +
-            ", ratings=" + ratings +
-            ", seenAttractions=" + seenAttractions +
-            '}';
-    }
 }

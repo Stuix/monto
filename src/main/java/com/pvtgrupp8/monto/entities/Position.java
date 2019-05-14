@@ -25,7 +25,7 @@ public class Position {
     private Attraction attraction;
 
     @OneToOne(mappedBy = "position")
-    @JsonBackReference
+    @JsonIgnoreProperties("position")
     private FunFact funFact;
 
     @ManyToOne

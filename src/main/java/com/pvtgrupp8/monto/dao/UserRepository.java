@@ -13,5 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Override
     List<User> findAll();
 
+    User findById(int id);
+
 
 }

@@ -1,7 +1,6 @@
 package com.pvtgrupp8.monto.entities;
 
 import com.fasterxml.jackson.annotation.*;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class Attraction {
 
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="fun_fact_id")
-    @JsonManagedReference
+    @JsonIgnoreProperties("attraction")
     private FunFact funFact;
 
     @Column(name="picture")
@@ -45,12 +44,12 @@ public class Attraction {
 
     @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="location_id")
-    @JsonIgnoreProperties("attraction") //Ignore depening on what entity gets called
+    @JsonIgnoreProperties("attraction") //Ignore depending on what entity gets called
     private Position position;
 
     @ManyToOne
     @JoinColumn(name="typeofattraction_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Category category;
 
     @ManyToMany
@@ -64,8 +63,7 @@ public class Attraction {
 
     @ManyToMany(mappedBy="attractions",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonBackReference
-    @JsonIgnoreProperties("attractions")
+    //@JsonBackReference
     private List<Route> includedInRoutes;
 
     @ManyToMany(mappedBy="seenAttractions",
@@ -165,19 +163,36 @@ public class Attraction {
         includedInRoutes.add(route);
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Attraction{" +
-            "id=" + id +
-            ", description='" + description + '\'' +
-            ", picture='" + picture + '\'' +
-            ", title='" + title + '\'' +
-            ", titleEnglish='" + titleEnglish + '\'' +
-            ", position=" + position +
-            ", category=" + category +
-            ", creators=" + creators +
-            '}';
+    public List<Route> getIncludedInRoutes() {
+        List<Route> nulledList = new ArrayList<>();
+        for(Route r : includedInRoutes){
+            r.setAttractions(null);
+            nulledList.add(r);
+        }
+       return nulledList;
     }
+
+
+
+    public void setIncludedInRoutes(List<Route> includedInRoutes) {
+        this.includedInRoutes = includedInRoutes;
+    }
+
+    public int getYearMade() {
+        return yearMade;
+    }
+
+    public void setYearMade(int yearMade) {
+        this.yearMade = yearMade;
+    }
+
+    public FunFact getFunFact() {
+        return funFact;
+    }
+
+    public void setFunFact(FunFact funFact) {
+        this.funFact = funFact;
+    }
+
+
 }

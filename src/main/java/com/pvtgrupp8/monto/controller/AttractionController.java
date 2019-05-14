@@ -22,9 +22,10 @@ public class AttractionController {
 
     @GetMapping("/{attractionId}") // When using pathvariable the mapping MUST mach the @PathVariable
     public Attraction getAttraction(@PathVariable("attractionId") int id){
-
         return attractionRepository.findById(id);
     }
+
+
 
 
 }
