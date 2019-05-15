@@ -1,6 +1,7 @@
 package com.pvtgrupp8.monto.dao;
 
 import com.pvtgrupp8.monto.entities.Attraction;
+import com.pvtgrupp8.monto.entities.Creator;
 import com.pvtgrupp8.monto.entities.Position;
 import com.pvtgrupp8.monto.entities.Route;
 import com.pvtgrupp8.monto.entities.User;
@@ -17,5 +18,6 @@ public class RepositoryConfig implements RepositoryRestConfigurer {
         config.exposeIdsFor(Route.class);
         config.exposeIdsFor(Position.class);
         config.exposeIdsFor(User.class);
+        config.exposeIdsFor(Creator.class);
     }
 }
