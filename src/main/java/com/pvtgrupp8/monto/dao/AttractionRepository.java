@@ -24,7 +24,7 @@ interface InlinePosition {
 }*/
 
 //@RepositoryRestResource(excerptProjection = InlinePosition.class)
-@CrossOrigin(origins = "http://localhost:8100")
+//@CrossOrigin(origins = "http://localhost:8100")
 public interface AttractionRepository extends JpaRepository<Attraction, Integer> {
 
     // @Query("from Attraction where title like %?1")
