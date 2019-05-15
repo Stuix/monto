@@ -30,7 +30,7 @@ public class AttractionController {
 
     @GetMapping("") // When using pathvariable the mapping MUST mach the @PathVariable
     public List<Attraction> getAttractions(){
-        return attractionRepository.findAll();
+        return attractionRepository.findAllByCategory_Name("Statue");
     }
 
 }
