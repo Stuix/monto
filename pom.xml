@@ -106,7 +106,7 @@
         <repository>
             <id>pvt08.repo</id>
             <name>PVT08 repo</name>
-            <url>git://git@https://github.com/Stuix/monto.git</url>
+            <url>https://github.com/Stuix/monto.git</url>
         </repository>
     </distributionManagement>
 
