@@ -49,7 +49,7 @@ public class Attraction {
 
     @ManyToOne
     @JoinColumn(name="typeofattraction_id")
-    @JsonManagedReference
+    //@JsonManagedReference
     private Category category;
 
     @ManyToMany
