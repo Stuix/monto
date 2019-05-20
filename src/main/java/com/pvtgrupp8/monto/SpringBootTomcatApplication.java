@@ -30,7 +30,7 @@ public class SpringBootTomcatApplication extends SpringBootServletInitializer {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:8100","https://purree.github.io/monto-frontend");
+                registry.addMapping("/**").allowedOrigins("http://localhost:8100","https://purree.github.io");
             }
         };
     }
