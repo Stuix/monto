@@ -9,7 +9,7 @@ import java.util.List;
 import com.pvtgrupp8.monto.entities.Position;
 import com.pvtgrupp8.monto.entities.Route;
 import com.pvtgrupp8.monto.entities.User;
-import com.pvtgrupp8.monto.wrappers.CreateUserSpotWrapper;
+//import com.pvtgrupp8.monto.wrappers.CreateUserSpotWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.Path;
 import org.springframework.data.rest.core.UriToEntityConverter;
