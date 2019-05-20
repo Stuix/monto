@@ -22,7 +22,7 @@ public class Route {
 
     @OneToMany(mappedBy="route",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonManagedReference
+   // @JsonManagedReference
     private List<Rating> ratings;
 
     @Column(name="description")
@@ -109,7 +109,7 @@ public class Route {
     }
 
      public User getRouteCreator() {
-       return routeCreator;
+        return routeCreator;
     }
 
     public void setRouteCreator(User routeCreator) {

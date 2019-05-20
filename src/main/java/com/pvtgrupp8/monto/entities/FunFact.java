@@ -15,10 +15,10 @@ public class FunFact {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(cascade= CascadeType.ALL)
+  /*  @OneToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="location_id")
     @JsonIgnoreProperties("funFact")
-    private Position position;
+    private Position position;*/
 
     @Column(name="description")
     private String description;
@@ -38,13 +38,13 @@ public class FunFact {
         this.id = id;
     }
 
-    public Position getPosition() {
+  /*  public Position getPosition() {
         return position;
     }
 
     public void setPosition(Position position) {
         this.position = position;
-    }
+    }*/
 
     public String getDescription() {
         return description;

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,8 @@ public class User {
 
     @Column(name="email")
     @Email(message="Not a valid email address")
+    @NotBlank(message="it must contain an email address")
+    @NotNull(message="it must contain an email address")
     private String email;
 
     @OneToMany(mappedBy = "routeCreator",
@@ -93,7 +96,6 @@ public class User {
     public String getEmail() {
         return email;
     }
-
 
     public void setEmail(String email) {
         this.email = email;

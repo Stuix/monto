@@ -4,15 +4,13 @@ import com.pvtgrupp8.monto.dao.UserRepository;
 import com.pvtgrupp8.monto.entities.Route;
 import com.pvtgrupp8.monto.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/controllers/users")
 public class UserController {
 
 
@@ -37,7 +35,5 @@ public class UserController {
     public User getActiveRoute(@PathVariable("userId") int id) {
         return userRepository.findById(id);
     }
-
-
 
 }

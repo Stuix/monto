@@ -24,9 +24,9 @@ public class Position {
     @JsonIgnoreProperties("position")
     private Attraction attraction;
 
-    @OneToOne(mappedBy = "position")
+   /* @OneToOne(mappedBy = "position")
     @JsonIgnoreProperties("position")
-    private FunFact funFact;
+    private FunFact funFact;*/
 
     @ManyToOne
     @JoinColumn(name="district_id")
@@ -35,9 +35,9 @@ public class Position {
 
     public Position(){};
 
-    public Position(double longitude, double latidude){
+    public Position(double longitude, double latitude){
         this.longitude = longitude;
-        this.latitude = latidude;
+        this.latitude = latitude;
     }
 
     public Position(double longitude, double latitude, Attraction attraction, District district) {
@@ -87,13 +87,13 @@ public class Position {
         this.district = district;
     }
 
-    public FunFact getFunFact() {
+   /* public FunFact getFunFact() {
         return funFact;
     }
 
     public void setFunFact(FunFact funFact) {
         this.funFact = funFact;
-    }
+    }*/
 
     @Override
     public String toString() {
