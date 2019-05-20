@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/attractions-with-meta")
-//@CrossOrigin("http://localhost:8100")
 public class AttractionController {
 
     private AttractionRepository attractionRepository;

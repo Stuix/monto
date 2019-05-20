@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.config.Projection;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 /*@Projection(name = "inlinePosition", types = { Attraction.class })
 interface InlinePosition {
@@ -24,7 +23,6 @@ interface InlinePosition {
 }*/
 
 //@RepositoryRestResource(excerptProjection = InlinePosition.class)
-@CrossOrigin(origins = "http://localhost:8100")
 public interface AttractionRepository extends JpaRepository<Attraction, Integer> {
 
     // @Query("from Attraction where title like %?1")
