@@ -24,7 +24,7 @@ public class Rating {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
     )
     @JoinColumn(name="user_id")
-    @JsonIgnoreProperties("ratings")
+    @JsonBackReference
     private User ratingCreator;
 
     @Column(name = "comment")
