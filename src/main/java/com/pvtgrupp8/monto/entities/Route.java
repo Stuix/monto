@@ -2,6 +2,7 @@ package com.pvtgrupp8.monto.entities;
 
 import com.fasterxml.jackson.annotation.*;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -24,6 +25,8 @@ public class Route {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
    // @JsonManagedReference
     private List<Rating> ratings;
+
+    //private double aggregatedRatings;
 
     @Column(name="description")
     private String description;
@@ -94,6 +97,18 @@ public class Route {
 
     public List<Rating> getRatings() {
         return ratings;
+    }
+
+    @Transient
+    public double getAggregatedRatings() {
+        double aggregatedRating = 0;
+        if(ratings== null){
+            ratings = new ArrayList<>();
+        }
+        for (Rating r: ratings) {
+            aggregatedRating += r.getRating();
+        }
+        return aggregatedRating/ratings.size();
     }
 
     public void setRatings(List<Rating> ratings) {

@@ -7,7 +7,7 @@ import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 
 @Entity
-@Table(name="rating")
+@Table(name="rating", uniqueConstraints = @UniqueConstraint(columnNames ={"user_id","route_id"}))
 public class Rating {
 
     @Id
