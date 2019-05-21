@@ -24,7 +24,7 @@ public class Rating {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
     )
     @JoinColumn(name="user_id")
-    @JsonBackReference
+    @JsonBackReference("rating-creator")
     private User ratingCreator;
 
     @Column(name = "comment")
@@ -34,7 +34,7 @@ public class Rating {
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
     )
     @JoinColumn(name="route_id")
-    @JsonBackReference
+    @JsonBackReference("route-rating")
     private Route route;
 
     public Rating() {}

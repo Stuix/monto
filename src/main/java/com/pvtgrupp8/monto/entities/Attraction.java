@@ -49,7 +49,6 @@ public class Attraction {
 
     @ManyToOne
     @JoinColumn(name="typeofattraction_id")
-    //@JsonManagedReference
     private Category category;
 
     @ManyToMany
@@ -63,12 +62,12 @@ public class Attraction {
 
     @ManyToMany(mappedBy="attractions",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    //@JsonBackReference
+    @JsonBackReference("attractions-in-route")
     private List<Route> includedInRoutes;
 
     @ManyToMany(mappedBy="seenAttractions",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonBackReference
+    @JsonBackReference("user-seen-attraction")
     private List<User> collectedByList;
 
 

@@ -31,11 +31,11 @@ public class User {
     @OneToMany(mappedBy = "routeCreator",
     cascade={
         CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-   // @JsonManagedReference
+    @JsonManagedReference("route-creator")
     private List<Route> routes;
 
     @OneToMany(mappedBy="ratingCreator",fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("ratingCreator")
+    @JsonManagedReference("rating-creator")
     private List<Rating> ratings;
 
    @ManyToMany
@@ -44,7 +44,6 @@ public class User {
        joinColumns={@JoinColumn(name="user_id")},
        inverseJoinColumns = {@JoinColumn(name="attraction_id")}
    )
-  // @JsonManagedReference
     private List<Attraction> seenAttractions;
 
    @ManyToOne

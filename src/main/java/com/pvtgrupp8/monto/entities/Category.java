@@ -21,7 +21,7 @@ public class Category {
 
     @OneToMany(mappedBy="category",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonBackReference
+    @JsonBackReference("attraction-category")
     private List<Attraction> attractions;
 
     public Category(){}
