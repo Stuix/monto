@@ -1,6 +1,7 @@
 package com.pvtgrupp8.monto.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -130,6 +131,15 @@ public class User {
 
     public void setActiveRoute(Route activeRoute) {
         this.activeRoute = activeRoute;
+    }
+
+    public JSONObject userInfo(){
+        JSONObject user = new JSONObject();
+        user.put("id",this.id);
+        user.put("username",this.username);
+        user.put("email",this.email);
+        return user;
+
     }
 
 }

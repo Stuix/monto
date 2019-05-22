@@ -1,6 +1,7 @@
 package com.pvtgrupp8.monto.entities;
 
 import com.fasterxml.jackson.annotation.*;
+import org.json.simple.JSONObject;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
@@ -45,6 +46,12 @@ public class Rating {
         this.ratingCreator = ratingCreator;
         this.comment = comment;
         this.route = route;
+    }
+
+    @Transient
+    public JSONObject getUserInfo(){
+        JSONObject user = this.ratingCreator.userInfo();
+        return user;
     }
 
     public int getId() {
