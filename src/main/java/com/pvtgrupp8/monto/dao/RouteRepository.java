@@ -11,7 +11,7 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 
     List<Route>findByRouteNameIgnoreCaseContaining(String routeName);
 
-    List<Route> findAllByPublic(boolean isPublic);
+    List<Route>findAllByRouteIsPublic(boolean isPublic);
 
 
     Route findById(int id);

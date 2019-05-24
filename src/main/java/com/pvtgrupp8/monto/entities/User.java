@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="user")
+@Table(name="user",uniqueConstraints = {@UniqueConstraint(columnNames= "email")})
 public class User {
 
     @Id
@@ -20,7 +20,8 @@ public class User {
     private int id;
 
     @Column(name="username")
-    @NotNull
+    @NotNull(message = "Username can't be empty")
+    @NotBlank(message = "Username can't be empty")
     private String username;
 
     @Column(name="email")
@@ -32,11 +33,11 @@ public class User {
     @OneToMany(mappedBy = "routeCreator",
     cascade={
         CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonManagedReference("route-creator")
+    //@JsonManagedReference("route-creator")
     private List<Route> routes;
 
     @OneToMany(mappedBy="ratingCreator",fetch = FetchType.LAZY)
-    @JsonManagedReference("rating-creator")
+    //@JsonManagedReference("rating-creator")
     private List<Rating> ratings;
 
    @ManyToMany

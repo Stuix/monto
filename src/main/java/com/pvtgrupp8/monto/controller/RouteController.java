@@ -30,9 +30,8 @@ public class RouteController {
 
     @GetMapping("/public-routes")
     public List<Route> getPublicRoutes(){
-        return routeRepository.findAllByPublic(true);
+        return routeRepository.findAllByRouteIsPublic(true);
     }
-
     @GetMapping("") // When using pathvariable the mapping MUST mach the @PathVariable
     public List<Route> getRoutes(){
         return routeRepository.findAll();

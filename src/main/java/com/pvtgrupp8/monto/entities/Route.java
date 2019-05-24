@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.*;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name="route")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Route {
 
     @Id
@@ -18,12 +20,13 @@ public class Route {
     private int id;
 
     @Column(name="route_name")
-    @NotNull
+    @NotNull(message="The route needs a name!")
+    @NotBlank(message="The route needs a name!")
     private String routeName;
 
     @OneToMany(mappedBy="route",
         cascade={CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
-    @JsonManagedReference("route-rating")
+    //@JsonManagedReference("route-rating")
     private List<Rating> ratings;
 
     @Column(name="description")
@@ -43,7 +46,7 @@ public class Route {
     private List<Attraction> attractions;
 
     @Column(name="is_public")
-    private boolean isPublic;
+    private boolean routeIsPublic;
 
     @OneToMany(mappedBy = "activeRoute",
         cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
@@ -136,12 +139,12 @@ public class Route {
         this.attractions = attractions;
     }
 
-    public boolean isPublic() {
-        return isPublic;
+    public boolean isRouteIsPublic() {
+        return routeIsPublic;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setRouteIsPublic(boolean routeIsPublic) {
+        this.routeIsPublic = routeIsPublic;
     }
 
     public List<User> getActiveUsers() {

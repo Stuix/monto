@@ -2,18 +2,11 @@ package com.pvtgrupp8.monto.controller;
 
 
 import com.pvtgrupp8.monto.dao.AttractionRepository;
-import com.pvtgrupp8.monto.dao.UserRepository;
 import com.pvtgrupp8.monto.entities.Attraction;
 import java.util.List;
 
-import com.pvtgrupp8.monto.entities.Position;
-import com.pvtgrupp8.monto.entities.Route;
-import com.pvtgrupp8.monto.entities.User;
-//import com.pvtgrupp8.monto.wrappers.CreateUserSpotWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.core.Path;
-import org.springframework.data.rest.core.UriToEntityConverter;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,16 +31,15 @@ public class AttractionController {
         return attractionRepository.findAllByCategory_Name("Statue");
     }
 
- /*   @RequestMapping(path="/addUserSpot/{id}", method=RequestMethod.PATCH)
-    @ResponseStatus(HttpStatus.CREATED)
-    public void adduserSpot(@RequestBody CreateUserSpotWrapper cus, @PathVariable("id") int id){
-        Attraction userSpot = cus.getUserSpot();
-        Position pos = cus.getPosition();
-        User user = userRepository.findById(id);
-        userSpot.setPosition(pos);
-        user.getActiveRoute().addAttraction(userSpot);
-
-        attractionRepository.save(userSpot);
-    }*/
+    @GetMapping("/findByTitleAndCategory/{category}/{title}")
+    public List<Attraction> findByTitleAndCategory(
+        @PathVariable("category") String category,
+        @PathVariable("title") String title){
+        List <Attraction> attractions = attractionRepository.findByTitleIgnoreCaseContainingAndCategory_Name(title,category);
+        if(attractions == null || attractions.size() == 0){
+            throw new ResourceNotFoundException("No Attraction with that name");
+        }
+        return attractions;
+    }
 
 }
