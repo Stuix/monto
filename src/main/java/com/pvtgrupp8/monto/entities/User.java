@@ -30,6 +30,9 @@ public class User {
     @NotNull(message="it must contain an email address")
     private String email;
 
+    @Column(name="profile_picture")
+    private String profilePicture;
+
     @OneToMany(mappedBy = "routeCreator",
     cascade={
         CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
@@ -132,6 +135,14 @@ public class User {
 
     public void setActiveRoute(Route activeRoute) {
         this.activeRoute = activeRoute;
+    }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
     }
 
     public JSONObject userInfo(){
