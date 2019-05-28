@@ -23,7 +23,7 @@ public class RouteController {
     public Route getRoute(@PathVariable("routeId") int id) {
         Route route =  routeRepository.findById(id);
         if (route == null) {
-            throw new ResourceNotFoundException("Hero not found");
+            throw new ResourceNotFoundException("Route not found");
         }
         return route;
     }
