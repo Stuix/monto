@@ -150,6 +150,7 @@ public class User {
         user.put("id",this.id);
         user.put("username",this.username);
         user.put("email",this.email);
+        user.put("profilePicture",this.profilePicture);
         return user;
 
     }
